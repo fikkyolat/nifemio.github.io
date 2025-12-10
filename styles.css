@@ -1,0 +1,495 @@
+/* ============================
+   GLOBAL / RESET
+   ============================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, sans-serif;
+  background: #e9edf2;
+  color: #333;
+}
+
+a {
+  color: #0b71b4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* simple utility */
+.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/* ============================
+   TOP NAV (dark bar with icons)
+   ============================ */
+
+.topnavswrapper {
+  background: #273b50;
+  color: #fff;
+  font-size: 14px;
+}
+
+#top {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+#top ul {
+  list-style: none;
+  margin: 0;
+  padding: 4px 16px;
+  text-align: right;
+}
+
+#top ul li {
+  display: inline-block;
+  margin-left: 18px;
+}
+
+#top ul li a {
+  color: #fff;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+#top ul li a .material-icons {
+  font-size: 18px;
+}
+
+/* ============================
+   HEADER WITH LOGOS
+   ============================ */
+
+header[role="banner"] {
+  background: #ffffff;
+  border-bottom: 1px solid #d4dde8;
+  padding: 12px 0;
+}
+
+#branding {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-left img,
+.logo-right img {
+  height: 40px;
+}
+
+.logo-left img {
+  margin-right: 14px;
+}
+
+/* ============================
+   MAIN LAYOUT
+   ============================ */
+
+/* Default layout for non-login pages (results & atar) */
+body:not(.login-page) article#main {
+  background: #0b71b4;
+  min-height: calc(100vh - 140px); /* approx nav + header */
+}
+
+body:not(.login-page) .contentbody {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 16px 60px;
+}
+
+/* Page titles */
+h1 {
+  margin: 0 0 20px;
+  font-size: 26px;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.home h1 {
+  text-transform: uppercase;
+}
+
+/* ============================
+   BASIC CARD STYLES
+   ============================ */
+
+.logincontainer,
+.appcontainer {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 26px 28px 32px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  margin-bottom: 30px;
+}
+
+/* center login cards by default */
+.home .logincontainer:first-of-type,
+.home .logincontainer:last-of-type {
+  max-width: 540px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* headings inside cards (overridden for login page later) */
+.logincontainer h1,
+.logincontainer h2 {
+  color: #0b71b4;
+  margin-top: 0;
+}
+
+/* card paragraphs */
+.logincontainer p,
+.appcontainer p {
+  margin: 8px 0;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* ============================
+   FORM FIELDS
+   ============================ */
+
+label {
+  display: block;
+  margin-top: 14px;
+  margin-bottom: 4px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.field-fullwidth {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #c5c9ce;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.field-fullwidth:focus {
+  border-color: #0b71b4;
+  box-shadow: 0 0 0 2px rgba(11, 113, 180, 0.25);
+}
+
+/* error text */
+p.error {
+  margin-top: 10px;
+  font-size: 13px;
+  color: red;
+  font-weight: bold;
+}
+
+.alignright {
+  text-align: right;
+}
+
+/* ============================
+   BUTTONS
+   ============================ */
+
+.butn {
+  background: #0b71b4;
+  border: none;
+  color: #ffffff;
+  padding: 11px 24px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.butn:hover {
+  background: #095a8a;
+}
+
+.butn:active {
+  background: #08476b;
+}
+
+/* wrapper on login / results buttons */
+.fullButtons,
+.buttonsWrapper {
+  margin-top: 18px;
+}
+
+/* ============================
+   RESULTS & ATAR CARDS
+   (results.html & atar.html)
+   ============================ */
+
+.appcontainer {
+  margin-top: 10px;
+}
+
+/* student details block */
+.results_details {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.results_details span {
+  font-weight: 600;
+}
+
+/* “not released” message */
+.not-released {
+  margin-top: 16px;
+  padding: 12px 16px;
+  background: #f3f7fb;
+  border-left: 4px solid #0b71b4;
+  font-size: 14px;
+}
+
+/* print icon area */
+.actions {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  float: right;
+}
+
+.actions li {
+  display: inline-block;
+}
+
+.print-icon img {
+  height: 32px;
+}
+
+/* table styling if you add results table later */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 14px;
+  font-size: 14px;
+}
+
+th,
+td {
+  padding: 8px 10px;
+  border-bottom: 1px solid #e0e4eb;
+  text-align: left;
+}
+
+th {
+  background: #f5f7fb;
+  font-weight: 600;
+}
+
+/* ATAR highlight box (if you add one) */
+.atar-box {
+  border-top: 4px solid #0b71b4;
+  padding: 12px 18px;
+  background: #f5f9fe;
+  text-align: center;
+}
+
+.atar-value {
+  font-size: 36px;
+  font-weight: 700;
+}
+
+/* ============================
+   FOOTER
+   ============================ */
+
+footer {
+  background: #f4f6fa;
+  border-top: 1px solid #d4dde8;
+  padding: 10px 0;
+  font-size: 13px;
+}
+
+#footernav {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+#footernav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0 16px;
+  display: flex;
+  gap: 18px;
+}
+
+#footernav ul li a {
+  color: #4a4f59;
+  text-decoration: none;
+}
+
+/* ============================
+   LOGIN PAGE BACKGROUND + CARD
+   (index.html only)
+   ============================ */
+
+/* Full-screen background image */
+body.login-page {
+  background-image: url("images/login-bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* optional, makes it nicer */
+}
+
+
+
+
+/* Remove blue block behind content on login page */
+body.login-page article#main {
+  background: transparent;
+  min-height: calc(100vh - 140px);
+}
+
+/* Slight overlay to make text readable */
+body.login-page article#main::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
+  z-index: 0;
+}
+
+/* Make login content sit above the overlay */
+body.login-page .contentbody {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+  margin: 40px auto 60px;
+}
+
+/* Main white login card */
+body.login-page .logincontainer:first-of-type {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 32px 36px 30px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+  margin-bottom: 22px;
+}
+
+/* Register card under it */
+body.login-page .logincontainer:last-of-type {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 22px 30px 24px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Login page headings like screenshot */
+body.login-page .logincontainer h1 {
+  font-size: 30px;
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+body.login-page .logincontainer h2 {
+  font-size: 22px;
+  margin-top: 0;
+  margin-bottom: 8px;
+  color: #1d5fa7;
+}
+
+/* Text + inputs */
+body.login-page .logincontainer p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+body.login-page label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+body.login-page .field-fullwidth {
+  width: 100%;
+  padding: 11px 12px;
+  border-radius: 4px;
+  border: 1px solid #c5c9ce;
+  font-size: 14px;
+}
+
+/* Blue pill login button, full width like screenshot */
+body.login-page .fullButtons {
+  margin-top: 18px;
+}
+
+body.login-page #loginService.butn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: #0074c8;
+  border-radius: 999px;
+  padding: 12px 0;
+}
+
+/* "Forgot your password?" bottom-right */
+body.login-page .alignright a {
+  font-size: 13px;
+  color: #2464c7;
+}
+
+/* Make footer minimal on login page */
+body.login-page footer {
+  background: transparent;
+  border-top: none;
+  color: #fff;
+}
+
+/* ============================
+   RESPONSIVE TWEAKS
+   ============================ */
+
+@media (max-width: 768px) {
+  #top ul {
+    text-align: left;
+  }
+
+  #branding {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .logincontainer,
+  .appcontainer {
+    padding: 20px 18px 26px;
+  }
+
+  .actions {
+    float: none;
+    margin-bottom: 10px;
+    text-align: right;
+  }
+
+  body.login-page .contentbody {
+    margin: 20px auto 40px;
+  }
+}

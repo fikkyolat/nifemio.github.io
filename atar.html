@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Your ATAR</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+  <style>
+    /* =========================================================
+       GLOBAL RESET + FONT
+    ========================================================= */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Helvetica Neue", Arial, "Segoe UI", sans-serif;
+      background: #eef0f7;          /* light grey around/below card */
+    }
+
+    a {
+      color: #0b71b4;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* =========================================================
+       TOP NAV
+    ========================================================= */
+    .topnavswrapper {
+      background: #273b50;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    #top {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    #top ul {
+      list-style: none;
+      margin: 0;
+      padding: 6px 16px;
+      text-align: right;
+    }
+
+    #top li {
+      display: inline-block;
+      margin-left: 18px;
+    }
+
+    #top li a {
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+    }
+
+    .material-icons {
+      font-size: 18px;
+    }
+
+    /* =========================================================
+       HEADER LOGOS
+    ========================================================= */
+    header[role="banner"] {
+      background: #ffffff;
+      border-bottom: 1px solid #dde2eb;
+      padding: 14px 0;
+    }
+
+    #branding {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-left img,
+    .logo-right img {
+      height: 42px;
+    }
+
+    .logo-left img:first-child {
+      margin-right: 12px;
+    }
+
+    /* =========================================================
+       BLUE STRIP + LAYOUT
+    ========================================================= */
+    article#main {
+      background: #0b6ead;          /* VTAC-ish blue */
+      padding: 46px 0 110px;        /* big bottom gap like screenshot */
+    }
+
+    .contentbody {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    /* "YOUR ATAR" heading – VTAC style */
+    h1 {
+      margin: 0 0 24px;
+      color: #ffffff;
+      font-family: "Helvetica Neue", Arial, "Segoe UI", sans-serif;
+      font-weight: 700;
+      font-size: 28px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;       /* wide letter spacing */
+    }
+
+    /* =========================================================
+       WHITE CARD
+    ========================================================= */
+    .appcontainer {
+      background: #ffffff;
+      max-width: 1060px;
+      margin: 0 auto;
+      border-radius: 7px;
+      padding: 34px 40px 44px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.14);
+      position: relative;
+    }
+
+    /* print icon */
+    .actions {
+      position: absolute;
+      right: 26px;
+      top: 26px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .print-icon img {
+      height: 32px;
+      cursor: pointer;
+    }
+
+    /* =========================================================
+       ATAR HEADER
+    ========================================================= */
+    .atar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 40px;
+      margin-bottom: 22px;
+    }
+
+    .results_details {
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .results_details span {
+      font-weight: 600;
+    }
+
+    /* right block with blue bar + ATAR */
+    .atar-right {
+      position: relative;
+      width: 280px;
+      text-align: center;
+      padding-top: 26px;   /* space for the blue bar */
+    }
+
+    .atar-right::before,
+    .atar-right::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      height: 4px;
+      width: 120px;
+      background: #00a0df;
+    }
+    .atar-right::before { left: 0; }
+    .atar-right::after  { right: 0; }
+
+    .atar-label {
+      margin: 0 0 4px;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #555;
+    }
+
+    .atar-value {
+      margin: 0;
+      font-size: 54px;
+      line-height: 1.1;
+      font-weight: 700;
+      color: #000;
+    }
+
+    /* =========================================================
+       TABLE
+    ========================================================= */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 18px;
+      font-size: 14px;
+    }
+
+    th {
+      background: #f6f8fb;
+      text-align: left;
+      padding: 11px 14px;
+      font-weight: 600;
+      border-bottom: 1px solid #e3e7ef;
+      color: #333;
+    }
+
+    td {
+      padding: 11px 14px;
+      border-bottom: 1px solid #eceff4;
+      color: #333;
+    }
+
+    tbody tr:nth-child(even) {
+      background: #f9fafb;
+    }
+
+    /* =========================================================
+       AGGREGATE + BUTTON
+    ========================================================= */
+    .aggregate-note {
+      margin-top: 22px;
+      font-size: 13px;
+      color: #444;
+      line-height: 1.5;
+    }
+
+    .aggregate-note-main {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .aggregate-note-main::before {
+      content: "";
+      display: inline-block;
+      width: 6px;
+      height: 22px;
+      background: #0b71b4;
+      border-radius: 3px;
+      margin-right: 10px;
+    }
+
+    .aggregate-note-main strong {
+      font-weight: 600;
+    }
+
+    .buttonsWrapper {
+      margin-top: 26px;
+    }
+
+    .butn {
+      background: #0d7fc2;
+      color: #ffffff;
+      padding: 12px 32px;
+      border-radius: 999px;
+      font-size: 15px;
+      letter-spacing: 0.03em;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+
+    .butn:hover {
+      background: #005a97;
+    }
+
+    /* =========================================================
+       FOOTER (sits in grey area)
+    ========================================================= */
+    footer {
+      background: #eef0f7;           /* same as body */
+      border-top: none;
+      padding: 40px 0 50px;
+      font-size: 13px;
+    }
+
+    #footernav {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    #footernav ul {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      justify-content: center;
+    }
+
+    #footernav li a {
+      color: #4a4f59;
+      text-decoration: none;
+    }
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+    @media (max-width: 900px) {
+      .atar-header {
+        flex-direction: column;
+        gap: 20px;
+      }
+      .atar-right {
+        margin: 0 auto;
+        width: 100%;
+        max-width: 320px;
+      }
+      .appcontainer {
+        padding: 24px 20px 32px;
+      }
+    }
+
+article#main {
+  /* top is blue, then switches to the grey page colour */
+  background: linear-gradient(
+    #0b6ead 0,
+    #0b6ead 260px,   /* height of blue strip */
+    #eef0f7 260px,
+    #eef0f7 100%
+  );
+  padding: 46px 0 80px;
+}
+
+/* Drop the card slightly so it sits nicely on the blue */
+.appcontainer {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+  </style>
+</head>
+
+<body>
+
+<!-- TOP NAV -->
+<div class="topnavswrapper">
+  <nav id="top">
+    <ul class="topmenu">
+      <li><a href="#"><i class="material-icons">home</i> <span>Home</span></a></li>
+      <li><a href="#"><i class="material-icons">settings</i> <span>Change password</span></a></li>
+<li>
+  <a href="index.html">
+    <i class="material-icons">lock</i> 
+    <span>Logout</span>
+  </a>
+</li>
+      <li><a href="#"><i class="material-icons">call</i> <span>Contact us</span></a></li>
+      <li><a href="#"><i class="material-icons">help_outline</i> <span>FAQs</span></a></li>
+    </ul>
+  </nav>
+</div>
+
+<!-- HEADER LOGOS -->
+<header role="banner">
+  <div id="branding">
+    <div class="logo-left">
+      <!-- make sure these files exist in your /images folder
+           and the names match exactly (case-sensitive) -->
+      <img src="images/vcaa-logo.png" alt="VCAA logo">
+      <img src="images/vic-gov-logo.png" alt="Victoria logo">
+    </div>
+    <div class="logo-right">
+      <img src="images/vtac-logo.png" alt="VTAC logo">
+    </div>
+  </div>
+</header>
+
+<!-- MAIN ATAR CARD -->
+<article id="main">
+  <section class="contentbody">
+    <h1>YOUR ATAR</h1>
+
+    <div class="appcontainer">
+
+      <ul class="actions">
+        <li class="print-icon">
+          <a href="#" onclick="window.print(); return false;">
+            <img src="images/print-icon.png" alt="Print">
+          </a>
+        </li>
+      </ul>
+
+      <div class="atar-header">
+        <div class="results_details">
+          <p>
+            <span>Student Number:</span> 23105418X<br>
+            <span>Student Name:</span> OLUWANIFEMI OLATUNBOSUN<br>
+            <span>Date Last Updated:</span> 11-Dec-2025 07:00:00 AM
+          </p>
+        </div>
+
+        <div class="atar-right">
+          <p class="atar-label">Your ATAR is:</p>
+          <p class="atar-value">73.62</p>
+        </div>
+      </div>
+
+      <table>
+        <thead>
+        <tr>
+          <th>Year</th>
+          <th>VCAA Study</th>
+          <th>Scaled Subject Score</th>
+          <th>Aggregate Contribution</th>
+          <th>Used As</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>2025</td>
+          <td>English</td>
+          <td>35.00</td>
+          <td>33.00</td>
+          <td>primary 4</td>
+        </tr>
+        <tr>
+          <td>2025</td>
+          <td>Biology</td>
+          <td>14.00</td>
+          <td>13.00</td>
+          <td>primary 4</td>
+        </tr>
+        <tr>
+          <td>2025</td>
+          <td>Business Management</td>
+          <td>32.00</td>
+          <td>29.00</td>
+          <td>primary 4</td>
+        </tr>
+        <tr>
+          <td>2025</td>
+          <td>Further Mathematics</td>
+          <td>33.00</td>
+          <td>31.00</td>
+          <td>primary 4</td>
+        </tr>
+        <tr>
+          <td>2025</td>
+          <td>Health and Human Development</td>
+          <td>35.00</td>
+          <td>31.00</td>
+          <td>(increment: 10%)</td>
+        </tr>
+        </tbody>
+      </table>
+
+      <p class="aggregate-note">
+        <span class="aggregate-note-main">
+          Your aggregate is: <strong>&nbsp;125.68</strong>
+        </span><br>
+        ATAR subject scores are ATAR subject scores calculated by VTAC through
+        the scaling process and include only those studies used in the
+        calculation of your ATAR.
+      </p>
+
+      <div class="buttonsWrapper">
+        <button class="butn" type="button" id="viewVceBtn">
+          View VCE Results »
+        </button>
+      </div>
+    </div>
+  </section>
+</article>
+
+<footer>
+  <nav id="footernav">
+    <ul>
+      <li><a href="#">Copyright</a></li>
+      <li><a href="#">Privacy</a></li>
+      <li><a href="#">Terms of use</a></li>
+    </ul>
+  </nav>
+</footer>
+
+<script>
+  document.getElementById('viewVceBtn').addEventListener('click', function () {
+    window.location.href = 'results.html';
+  });
+</script>
+
+</body>
+</html>

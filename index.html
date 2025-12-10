@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="styles.css">
+  <title>VCE Results and ATAR 2025</title>
+  <style>
+    p.error { color:red; font-weight:bold; display:none; }
+    p.displayerror { color:red; font-weight:bold; }
+    ul.errorUlClass li { color:red; padding:0; font-weight:bold; }
+  </style>
+</head>
+
+<body class="login-page">
+
+<!-- top nav + header exactly as you already have ... -->
+
+<article id="main" class="home">
+  <section class="contentbody row clearfix">
+
+    <div class="logincontainer">
+      <h1>VCE Results and ATAR 2025</h1>
+      <p><strong>VCE Results and ATAR advice will be available from 7:00 AM,
+        Thursday 11 December 2025.</strong></p>
+      <p>Please enter your VCAA Student Number and Results Service Password</p>
+
+      <!-- this is the error we’ll show on wrong login -->
+      <p id="errorLabel" class="error">
+        The Student Number or Results Service Password you have entered is not valid.
+      </p>
+
+      <!-- 🔥 IMPORTANT: remove real backend action, we’ll handle with JS -->
+      <form id="jrsForm">
+        <div id="loginDiv">
+          <label for="studentNumber">Student Number</label>
+          <input id="studentNumber" name="username" class="field-fullwidth"
+                 type="text" placeholder="e.g. 14123917W" autocomplete="off">
+
+          <label for="resultsPIN">Results Service Password</label>
+          <input id="resultsPIN" name="password" class="field-fullwidth"
+                 type="password" autocomplete="off">
+
+          <div style="clear: both;"></div>
+          <div class="fullButtons">
+            <button class="butn" id="loginService" type="submit">
+              Login &raquo;
+            </button>
+          </div>
+
+          <p class="alignright">
+            <a href="an/students/fpwd.htm" target="_self" style="float:right;">
+              Forgot your password?
+            </a>
+          </p>
+        </div>
+      </form>
+    </div>
+
+    <!-- register card etc... -->
+
+  </section>
+</article>
+
+<footer>…</footer>
+
+<!-- 🔐 SIMPLE FRONT-END LOGIN CHECK -->
+<script>
+  document.getElementById('jrsForm').addEventListener('submit', function (e) {
+    e.preventDefault(); // stop real form submit
+
+    const username = document.getElementById('studentNumber').value.trim();
+    const password = document.getElementById('resultsPIN').value;
+
+    const correctUser = '23105418X';
+    const correctPass = '75324Crc$';
+
+    if (username === correctUser && password === correctPass) {
+      // ✅ go to VCE RESULTS page
+      window.location.href = 'results.html';
+    } else {
+      // ❌ show error message
+      document.getElementById('errorLabel').style.display = 'block';
+    }
+  });
+</script>
+</body>
+</html>
